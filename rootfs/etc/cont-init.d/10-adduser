@@ -1,0 +1,21 @@
+#!/usr/bin/with-contenv bash
+
+USER=thinhhoang
+GROUP=thinhhoang
+PUID=${PUID:-911}
+PGID=${PGID:-911}
+
+groupmod -o -g "$PGID" "$USER"
+usermod -o -u "$PUID" "$USER"
+
+echo "
+-------------------------------------
+GID/UID
+-------------------------------------
+User uid:    $(id -u $USER)
+User gid:    $(id -g $USER)
+-------------------------------------
+"
+chown $USER:$GROUP /app
+chown $USER:$GROUP /config
+chown $USER:$GROUP /defaults
