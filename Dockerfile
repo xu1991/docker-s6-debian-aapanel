@@ -23,6 +23,7 @@ RUN apt-get update \
   && mkdir -p /app /config /defaults \
   && apt-get clean \
   && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
+  && wget -O install.sh http://www.aapanel.com/script/install-ubuntu_6.0_en.sh && bash install.sh
 
 COPY rootfs /
 
