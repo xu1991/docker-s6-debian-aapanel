@@ -33,7 +33,7 @@ RUN apt-get update \
   && rm -rf /etc/ssh/ssh_host_rsa_key \
   && rm -rf /etc/ssh/ssh_host_ecdsa_key \
   && rm -rf /etc/ssh/ssh_host_ed25519_key \
-  && ssh-keygen -t rsa -f ~/.ssh/id_rsa -P '' && cat /$USER/.ssh/id_rsa.pub >> /$USER/.ssh/authorized_keys \
+  && ssh-keygen -t rsa -f ~/.ssh/id_rsa -P '' && cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys \
   && sed -i 's/PermitEmptyPasswords yes/PermitEmptyPasswords no /' /etc/ssh/sshd_config  \
   && sed -i 's/PermitRootLogin without-password/PermitRootLogin yes /' /etc/ssh/sshd_config  \
   && echo " StrictHostKeyChecking no" >> /etc/ssh/ssh_config \
