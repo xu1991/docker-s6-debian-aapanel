@@ -30,9 +30,9 @@ RUN apt-get update \
   && sed -i "s/#PermitRootLogin.*/PermitRootLogin yes/" /etc/ssh/sshd_config \
   && mkdir -p /var/run/sshd/ \
   && mkdir -p /$USER/.ssh/ \
-  && rm -rf /etc/ssh/ssh_host_rsa_key \
-  && rm -rf /etc/ssh/ssh_host_ecdsa_key \
-  && rm -rf /etc/ssh/ssh_host_ed25519_key \
+#  && rm -rf /etc/ssh/ssh_host_rsa_key \
+#  && rm -rf /etc/ssh/ssh_host_ecdsa_key \
+#  && rm -rf /etc/ssh/ssh_host_ed25519_key \
   && ssh-keygen -t rsa -f ~/.ssh/id_rsa -P '' && cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys \
   && sed -i 's/PermitEmptyPasswords yes/PermitEmptyPasswords no /' /etc/ssh/sshd_config  \
   && sed -i 's/PermitRootLogin without-password/PermitRootLogin yes /' /etc/ssh/sshd_config  \
