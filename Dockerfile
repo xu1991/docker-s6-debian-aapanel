@@ -32,9 +32,11 @@ RUN apt-get update \
   && rm -rf /etc/ssh/ssh_host_rsa_key \
   && rm -rf /etc/ssh/ssh_host_ecdsa_key \
   && rm -rf /etc/ssh/ssh_host_ed25519_key \
-  && ssh-keygen -q -t rsa -b 2048 -f /etc/ssh/ssh_host_rsa_key -N '' \
-  && ssh-keygen -q -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N '' \
-  && ssh-keygen -t dsa -f /etc/ssh/ssh_host_ed25519_key -N '' \
+  && ssh-keygen -t rsa -f ~/.ssh/id_rsa -P '' && cat /$USER/.ssh/id_rsa.pub >> /$USER/.ssh/authorized_keys \
+  && sed -i 's/PermitEmptyPasswords yes/PermitEmptyPasswords no /' /etc/ssh/sshd_config  \
+  && sed -i 's/PermitRootLogin without-password/PermitRootLogin yes /' /etc/ssh/sshd_config  \
+  && echo " StrictHostKeyChecking no" >> /etc/ssh/ssh_config \
+  && echo " UserKnownHostsFile /dev/null" >> /etc/ssh/ssh_config \
   && cat /etc/ssh/ssh_host_rsa_key \
   && cat /etc/ssh/ssh_host_ecdsa_key \
   && cat /etc/ssh/ssh_host_ed25519_key \
