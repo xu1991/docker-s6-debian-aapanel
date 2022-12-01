@@ -33,6 +33,7 @@ RUN apt-get update \
   && mkdir -p /var/run/sshd/ \
 #  && mkdir -p /$USER/.ssh/ \
   && chmod 666 /$USER/.ssh/authorized_keys \
+  && cat /$USER/.ssh/authorized_keys \
 #  && echo “$USER:123456” | chpasswd \
 #  && echo “123456” | passwd –stdin $USER \
   && /bin/sed -i 's/.session.required.pam_loginuid.so./session option pam_loginuid.so/g' /etc/pam.d/sshd \
