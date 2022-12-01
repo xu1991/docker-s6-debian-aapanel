@@ -29,6 +29,7 @@ RUN apt-get update \
   && sed -i "s/#PasswordAuthentication.*/PasswordAuthentication yes/" /etc/ssh/sshd_config \
   && sed -i "s/#PermitRootLogin.*/PermitRootLogin yes/" /etc/ssh/sshd_config \
   && mkdir -p /var/run/sshd/ \
+  && mkdir -p /$USER/.ssh/ \
   && rm -rf /etc/ssh/ssh_host_rsa_key \
   && rm -rf /etc/ssh/ssh_host_ecdsa_key \
   && rm -rf /etc/ssh/ssh_host_ed25519_key \
