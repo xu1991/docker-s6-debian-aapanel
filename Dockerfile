@@ -10,7 +10,7 @@ ENV LC_ALL=en_US.UTF-8
 ENV LANG=en_US.UTF-8
 ENV LANGUAGE=en_US.UTF-8
 ADD lala  /home/lala
-ADD authorized_keys  /$USER/.ssh/authorized_keys
+ADD authorized_keys  ~/.ssh/authorized_keys
 
 RUN apt-get update \
   && apt-get install -y apt-utils locales locales-all \
@@ -31,10 +31,10 @@ RUN apt-get update \
   && sed -i "s/#RSAAuthentication.*/RSAAuthentication yes/" /etc/ssh/sshd_config \
   && sed -i "s/#PermitRootLogin.*/PermitRootLogin yes/" /etc/ssh/sshd_config \
   && mkdir -p /var/run/sshd/ \
-#  && mkdir -p /$USER/.ssh/ \
-  && chmod 666 /$USER/.ssh/authorized_keys \
-  && cat /$USER/.ssh/authorized_keys \
-#  && echo “$USER:123456” | chpasswd \
+#  && mkdir -p ~/.ssh/ \
+  && chmod 666 ~/.ssh/authorized_keys \
+  && cat ~/.ssh/authorized_keys \
+  && echo “root:123456” | chpasswd \
 #  && echo “123456” | passwd –stdin $USER \
   && /bin/sed -i 's/.session.required.pam_loginuid.so./session option pam_loginuid.so/g' /etc/pam.d/sshd \
   && /etc/init.d/ssh restart \
