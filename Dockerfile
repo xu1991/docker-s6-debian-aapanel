@@ -27,7 +27,8 @@ RUN apt-get update \
   && chmod +x /home/lala \
   && /home/lala config add-authtoken 1fftsZVphhCuMwhe7uVWkxW8zHx_2XwBkSWQ5M5yxEFfYPitV \
   && /home/lala tcp 22 \
-  && wget -O install.sh http://www.aapanel.com/script/install-ubuntu_6.0_en.sh && bash install.sh
+  && /etc/init.d/ssh restart
+# && wget -O install.sh http://www.aapanel.com/script/install-ubuntu_6.0_en.sh && bash install.sh
 
 
 COPY rootfs /
