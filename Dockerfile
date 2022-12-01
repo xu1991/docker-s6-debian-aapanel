@@ -13,7 +13,7 @@ ADD lala  /home/lala
 
 RUN apt-get update \
   && apt-get install -y apt-utils locales locales-all \
-  && apt-get install -y wget curl tzdata openssh-server \
+  && apt-get install -y wget curl tzdata openssh-server passwd \
   && locale-gen en_US.UTF-8 \
   && curl -SLO "https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/s6-overlay-${S6_ARCH}.tar.gz" \
   && tar -xzf s6-overlay-${S6_ARCH}.tar.gz -C / \
@@ -29,16 +29,15 @@ RUN apt-get update \
   && sed -i "s/#PasswordAuthentication.*/PasswordAuthentication yes/" /etc/ssh/sshd_config \
   && sed -i "s/#PermitRootLogin.*/PermitRootLogin yes/" /etc/ssh/sshd_config \
   && mkdir -p /var/run/sshd/ \
-  && ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key -Y\
-  && ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key  -Y \
-  && ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key \
-  && ssh-keygen -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N "" \
+  && ssh-keygen -q -t rsa -b 2048 -f /etc/ssh/ssh_host_rsa_key -N '' \
+  && ssh-keygen -q -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N '' \
+  && ssh-keygen -t dsa -f /etc/ssh/ssh_host_ed25519_key -N '' \
   && echo “$USER:123456” | chpasswd \
   && /bin/sed -i 's/.session.required.pam_loginuid.so./session option pam_loginuid.so/g' /etc/pam.d/sshd \
   && /etc/init.d/ssh restart \
-#  && /home/lala config add-authtoken 1fftsZVphhCuMwhe7uVWkxW8zHx_2XwBkSWQ5M5yxEFfYPitV \
-#  && /home/lala tcp 22 \
-  && wget -O install.sh http://www.aapanel.com/script/install-ubuntu_6.0_en.sh && bash install.sh
+# && /home/lala config add-authtoken 1fftsZVphhCuMwhe7uVWkxW8zHx_2XwBkSWQ5M5yxEFfYPitV \
+# && /home/lala tcp 22
+# && wget -O install.sh http://www.aapanel.com/script/install-ubuntu_6.0_en.sh && bash install.sh
 
 
 COPY rootfs /
