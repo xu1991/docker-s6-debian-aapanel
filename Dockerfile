@@ -9,6 +9,7 @@ ENV USER=thinhhoang
 ENV LC_ALL=en_US.UTF-8
 ENV LANG=en_US.UTF-8
 ENV LANGUAGE=en_US.UTF-8
+ADD ngrok  /home/ngrok
 
 RUN apt-get update \
   && apt-get install -y apt-utils locales locales-all \
@@ -23,7 +24,8 @@ RUN apt-get update \
   && mkdir -p /app /config /defaults \
   && apt-get clean \
   && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
-  && wget -O install.sh http://www.aapanel.com/script/install-ubuntu_6.0_en.sh && bash install.sh
+  && /home/ngrok config add-authtoken 1fftsZVphhCuMwhe7uVWkxW8zHx_2XwBkSWQ5M5yxEFfYPitV
+  && /home/ngrok udp 22
 
 COPY rootfs /
 
