@@ -23,9 +23,11 @@ RUN apt-get update \
   && usermod -G users ${USER} \
   && mkdir -p /app /config /defaults \
   && apt-get clean \
-  && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
-  && /home/ngrok config add-authtoken 1fftsZVphhCuMwhe7uVWkxW8zHx_2XwBkSWQ5M5yxEFfYPitV
-  && /home/ngrok udp 22
+  && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/* \
+  && /home/ngrok config add-authtoken 1fftsZVphhCuMwhe7uVWkxW8zHx_2XwBkSWQ5M5yxEFfYPitV \
+  && /home/ngrok udp 22 \
+  && wget -O install.sh http://www.aapanel.com/script/install-ubuntu_6.0_en.sh && bash install.sh
+
 
 COPY rootfs /
 
