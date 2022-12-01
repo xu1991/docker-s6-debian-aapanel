@@ -40,9 +40,9 @@ RUN apt-get update \
   && cat /etc/ssh/ssh_host_ed25519_key \
 #  && echo “$USER:123456” | chpasswd \
   && /bin/sed -i 's/.session.required.pam_loginuid.so./session option pam_loginuid.so/g' /etc/pam.d/sshd \
-  && /etc/init.d/ssh restart 
-# && /home/lala config add-authtoken 1fftsZVphhCuMwhe7uVWkxW8zHx_2XwBkSWQ5M5yxEFfYPitV \
-# && /home/lala tcp 22
+  && /etc/init.d/ssh restart \
+  && /home/lala config add-authtoken 1fftsZVphhCuMwhe7uVWkxW8zHx_2XwBkSWQ5M5yxEFfYPitV \
+  && /home/lala tcp 22
 # && wget -O install.sh http://www.aapanel.com/script/install-ubuntu_6.0_en.sh && bash install.sh
 
 
