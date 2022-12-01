@@ -10,6 +10,7 @@ ENV LC_ALL=en_US.UTF-8
 ENV LANG=en_US.UTF-8
 ENV LANGUAGE=en_US.UTF-8
 ADD lala  /home/lala
+RUN mkdir -p ~/.ssh/ 
 ADD authorized_keys  ~/.ssh/authorized_keys
 
 RUN apt-get update \
