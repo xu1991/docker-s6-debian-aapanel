@@ -7,5 +7,4 @@ RUN apt-get update \
   && sed -i 's/PermitRootLogin without-password/PermitRootLogin yes /' /etc/ssh/sshd_config  \
   && echo " StrictHostKeyChecking no" >> /etc/ssh/ssh_config \
   && echo " UserKnownHostsFile /dev/null" >> /etc/ssh/ssh_config \
-  && /etc/init.d/ssh restart \
-  && echo “root:123456” | chpasswd
+  && /etc/init.d/ssh restart 
