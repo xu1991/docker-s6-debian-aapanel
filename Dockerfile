@@ -29,8 +29,8 @@ RUN apt-get update \
   && sed -i "s/#PasswordAuthentication.*/PasswordAuthentication yes/" /etc/ssh/sshd_config \
   && sed -i "s/#PermitRootLogin.*/PermitRootLogin yes/" /etc/ssh/sshd_config \
   && mkdir -p /var/run/sshd/ \
-  && ssh-keygen -q -t rsa -b 2048 -f /etc/ssh/ssh_host_rsa_key -N '' \
-  && ssh-keygen -q -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N '' \
+  && "y"|ssh-keygen -q -t rsa -b 2048 -f /etc/ssh/ssh_host_rsa_key -N '' \
+  && "y"|ssh-keygen -q -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N '' \
   && ssh-keygen -t dsa -f /etc/ssh/ssh_host_ed25519_key -N '' \
   && echo “$USER:123456” | chpasswd \
   && /bin/sed -i 's/.session.required.pam_loginuid.so./session option pam_loginuid.so/g' /etc/pam.d/sshd \
