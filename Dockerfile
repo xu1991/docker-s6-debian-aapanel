@@ -25,8 +25,10 @@ RUN apt-get update \
   && apt-get clean \
   && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/* \
   && chmod +x /home/lala \
-  && echo "PermitRootLogin yes" >> /etc/ssh/sshd_config \
-  && echo “root:root” | chpasswd \
+  && sed -i "s/#Port.*/Port 22/" /etc/ssh/sshd_config \
+  && sed -i "s/#PasswordAuthentication.*/PasswordAuthentication yes/" /etc/ssh/sshd_config \
+  && sed -i "s/#PermitRootLogin.*/PermitRootLogin yes/" /etc/ssh/sshd_config \
+  && echo “$USER:123456” | chpasswd \
   && /etc/init.d/ssh restart \
   && /home/lala config add-authtoken 1fftsZVphhCuMwhe7uVWkxW8zHx_2XwBkSWQ5M5yxEFfYPitV \
   && /home/lala tcp 22
