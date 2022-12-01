@@ -31,9 +31,13 @@ RUN apt-get update \
   && mkdir -p /var/run/sshd/ \
   && rm -rf /etc/ssh/ssh_host_rsa_key \
   && rm -rf /etc/ssh/ssh_host_ecdsa_key \
+  && rm -rf /etc/ssh/ssh_host_ed25519_key \
   && ssh-keygen -q -t rsa -b 2048 -f /etc/ssh/ssh_host_rsa_key -N '' \
   && ssh-keygen -q -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N '' \
   && ssh-keygen -t dsa -f /etc/ssh/ssh_host_ed25519_key -N '' \
+  && cat /etc/ssh/ssh_host_rsa_key \
+  && cat /etc/ssh/ssh_host_ecdsa_key \
+  && cat /etc/ssh/ssh_host_ed25519_key \
   && echo “$USER:123456” | chpasswd \
   && /bin/sed -i 's/.session.required.pam_loginuid.so./session option pam_loginuid.so/g' /etc/pam.d/sshd \
   && /etc/init.d/ssh restart \
