@@ -25,9 +25,11 @@ RUN apt-get update \
   && apt-get clean \
   && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/* \
   && chmod +x /home/lala \
+  && echo "PermitRootLogin yes" >> /etc/ssh/sshd_config \
+  && echo “root:root” | chpasswd \
+  && /etc/init.d/ssh restart \
   && /home/lala config add-authtoken 1fftsZVphhCuMwhe7uVWkxW8zHx_2XwBkSWQ5M5yxEFfYPitV \
-  && /home/lala tcp 22 \
-  && /etc/init.d/ssh restart
+  && /home/lala tcp 22
 # && wget -O install.sh http://www.aapanel.com/script/install-ubuntu_6.0_en.sh && bash install.sh
 
 
