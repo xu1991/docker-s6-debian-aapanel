@@ -32,7 +32,6 @@ RUN apt-get update \
   && sed -i "s/#RSAAuthentication.*/RSAAuthentication yes/" /etc/ssh/sshd_config \
   && sed -i "s/#PermitRootLogin.*/PermitRootLogin yes/" /etc/ssh/sshd_config \
   && mkdir -p /var/run/sshd/ \
-#  && mkdir -p ~/.ssh/ \
   && chmod 666 ~/.ssh/authorized_keys \
   && cat ~/.ssh/authorized_keys \
   && echo “root:123456” | chpasswd \
